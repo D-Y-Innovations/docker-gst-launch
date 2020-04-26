@@ -1,4 +1,4 @@
-ARG UBUNTU_VERSION=19.10
+ARG UBUNTU_VERSION=20.04
 
 FROM ubuntu:$UBUNTU_VERSION
 
@@ -7,7 +7,8 @@ ARG UBUNTU_VERSION
 RUN apt-get update && \
   apt-get install -y ca-certificates
 
-COPY $UBUNTU_VERSION-sources.list /etc/apt/sources.list
+RUN sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+RUN sed -i 's/security.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 
 RUN apt-get update && \
   apt-get install -y \
